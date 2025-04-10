@@ -15,9 +15,7 @@ RPN::RPN(const std::string &input)
         len = position - current;
         if (len != 1)
             throw rpnExceptions();
-        
-        std::cout << "input: "<< str.substr(current, len) << std::endl;
-        
+
         if ( isdigit( str.substr( current, len )[0] ) )
             this->stk->push( toInt( str.substr( current, len ) ) );
         else if ( str.substr( current, len ) == "*" || str.substr( current, len ) == "/" ||
