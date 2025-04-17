@@ -16,7 +16,7 @@ class PmergeMe
         PmergeMe();
         int                 toInt( char *c );
         bool                checkOrder();
-        int*                getJacobstalSequence(size_t len);
+        size_t*                getJacobstalSequence(size_t len);
 
         std::vector<int>    fordJohnsonByVec( std::vector<int> *vec );
         std::vector<int>*   binaryInsertByVec( std::vector<int> *sortedArray, int element );
