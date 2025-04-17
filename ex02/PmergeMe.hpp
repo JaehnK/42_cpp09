@@ -5,21 +5,25 @@
 #include <iostream>
 #include <exception>
 #include <cstdlib>
+#include <cmath>
 
 class PmergeMe
 {
     private:
-        std::vector <int>   *vec;
-        std::list   <int>   *lst;
+        std::vector <int>*   _vec;
+        std::list   <int>*   _lst;
 
         PmergeMe();
         int                 toInt( char *c );
         bool                checkOrder();
+        int*                getJacobstalSequence(size_t len);
+
+        std::vector<int>    fordJohnsonByVec( std::vector<int> *vec );
+        std::vector<int>*   binaryInsertByVec( std::vector<int> *sortedArray, int element );
     public:
         PmergeMe( char **av );
         ~PmergeMe();
 
-        void                fordJohnsonByVec( void );
 
 
 
