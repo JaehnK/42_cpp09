@@ -94,8 +94,14 @@ std::vector<int>    *PmergeMe::binaryInsertByVec( std::vector<int> *sortedArray,
 {
     size_t left, right, mid;
 
+    if (sortedArray->empty())
+    {
+        sortedArray->push_back(element);
+        return sortedArray;
+    }
+    
     left = 0;
-    right = (*sortedArray).size() - 1;
+    right = (sortedArray->size()) - 1;
 
     while (left <= right)
     {
@@ -169,30 +175,75 @@ std::vector<int>    PmergeMe::fordJohnsonByVec( std::vector<int> *vec )
                 std::cout << *it << " ";
             std::cout << std::endl;
         }
+        else
+        {
+            sortedSmallElements = new std::vector<int> ();
+            sortedSmallElements->push_back(pairs.at(0).first);
+            std::cout << "sorted small elements: ";
+            for (std::vector<int>::iterator it = sortedSmallElements->begin(); it != sortedSmallElements->end(); it++)
+                std::cout << *it << " ";
+            std::cout << std::endl;
+        }
     }
     
     sortedArray.clear();
-    if ( !sortedSmallElements )
-    {
-        sortedArray.push_back( sortedSmallElements->at(0) );
-    }
-    else
-        sortedSmallElements = new std::vector<int> ();
+    std::cout << "Sorted Arr Cleared" << std::endl;
+
+    // if ( sortedSmallElements )
+    // {
+    //     std::cout << "Small Elements 0: " << sortedSmallElements->at(0) << std::endl;
+    //     sortedArray.push_back( sortedSmallElements->at(0) );
+    // }
+    // else
+    // {
+    //     std::cout << "Empty Small Elements" << std::endl;
+    //     sortedSmallElements = new std::vector<int> ();
+    // }
 
 
     jacobstal = getJacobstalSequence(vec->size());
+    std::cout << "Small Element size: "<<sortedSmallElements->size() << std::endl;
     for (size_t i = 1; i < sortedSmallElements->size(); i++)
     {
-        if (jacobstal[i] < sortedSmallElements->size()) 
+        if (jacobstal[i] < sortedSmallElements->size() && sortedSmallElements->at( jacobstal[ i ]) != -1) 
         {
             binaryInsertByVec( &sortedArray, sortedSmallElements->at( jacobstal[ i ] ) );
+            sortedSmallElements->at( jacobstal[ i ] ) = -1;
         }
     }
 
-    std::cout << "Big Number Start"<< std::endl;
+    std::cout << "SORTEDJACOB" << std::endl;
+    for (std::vector<int>::iterator it = sortedArray.begin(); it != sortedArray.end(); it++)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << "Sorted" <<std::endl;
+
+    std::cout << "Small Element size: "<<sortedSmallElements->size() << std::endl;
+    for (size_t i = 0; i < sortedSmallElements->size(); i++)
+    {
+        if (sortedSmallElements->at( i ) != -1) 
+        {
+            std::cout << "asdf: " << sortedSmallElements->at( i ) << std::endl;
+            binaryInsertByVec( &sortedArray, sortedSmallElements->at( i ) );
+        }
+        else
+            continue;
+    }
+    std::cout << "SORTEDARR" << std::endl;
+    for (std::vector<int>::iterator it = sortedArray.begin(); it != sortedArray.end(); it++)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << "Sorted" <<std::endl;
+
+    std::cout << "Big Number Start ";
     for ( size_t i = 0; i < pairs.size(); i++ )
+    {
+        std::cout << "[" << i <<"] "  << pairs.at(i).second << " " ;
         binaryInsertByVec(&sortedArray, pairs.at(i).second);
-    
+    }
+    std::cout << std::endl;
     if (extraElement)
     {
         std::cout << "KKAKTUKI Start"<< std::endl;
@@ -201,6 +252,14 @@ std::vector<int>    PmergeMe::fordJohnsonByVec( std::vector<int> *vec )
     }
     
     std::cout << "FINISH" << std::endl;
+    for (std::vector<int>::iterator it = sortedArray.begin(); it != sortedArray.end(); it++)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << "Sorted Finished" <<std::endl;
+    
+    if (sortedSmallElements)
+        delete sortedSmallElements;
     delete[] jacobstal;
     return ( sortedArray );
 }

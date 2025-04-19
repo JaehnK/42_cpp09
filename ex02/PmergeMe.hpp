@@ -23,10 +23,6 @@ class PmergeMe
     public:
         PmergeMe( char **av );
         ~PmergeMe();
-
-
-
-
         class   InvalidInputException: public std::exception
         {
             public:
