@@ -1,5 +1,5 @@
 C++ = c++
-CPP_FLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CPP_FLAGS = -Wall -Werror -Wextra -std=c++98  # -g -fsanitize=address
 
 SRCS =	main.cpp \
 		PmergeMe.cpp
