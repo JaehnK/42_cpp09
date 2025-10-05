@@ -12,15 +12,15 @@
 class PmergeMe
 {
     private:
-        size_t*                     _jacobstal;
+        std::vector<size_t>         _jacobstal;
         size_t                      _cnt;
-        std::vector <int>*          _vec;
-        std::list   <int>*          _lst;
+        std::vector<int>            _vec;
+        std::list<int>              _lst;
         
         PmergeMe();
         int                         toInt( char *c );
         bool                        checkOrder();
-        size_t*                     getJacobstalSequence(size_t len);
+        std::vector<size_t>         getJacobstalSequence(size_t len);
 
         std::vector<int>            fordJohnsonByVec( std::vector<int> *vec );
         std::vector<int>*           binaryInsertByVec( std::vector<int> *sortedArray, int element );
